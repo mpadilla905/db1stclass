@@ -5,12 +5,23 @@
 
 import sys
 
+def printHelp():
+    print(" Usage: python3 RNAtoProt.py -seq <RNAseq_file> -o <protein_file> ")
+    print("\tRNAseq_file must be a one-row file.")
+    print("\tIf no output file is specified, it will be printed. ")
+    exit(1)
+
+#########################################
+#   Command-line arguments              #
+#########################################
+
 if __name__=='__main__':
     # Input validations
-    if len(sys.argv) <= 2:
+    if '-h' in sys.argv:
+        printHelp()
+    elif len(sys.argv) <= 2:
         print("\n Error: RNA sequence file was not introduced or not indicated.")
-        print(" Usage: python3 RNAtoProt.py -seq <RNAseq_file> -o <protein_file>\n ")
-        exit(1)
+        printHelp()
 
     # Recognize arguments
     outfile = 'not specified'
@@ -23,9 +34,7 @@ if __name__=='__main__':
             outfile = sys.argv.pop(1)
         elif sys.argv[1] == '-h':
             sys.argv.pop(1)
-            print(" Usage: python3 RNAtoProt.py -seq <RNAseq_file> -o <protein_file> ")
-            print("\tRNAseq_file must be a one-row file")
-            print("\tIf no output file is specified, it will be printed ")
+            printHelp()
 
 #########################################
 #              CODON TREES              #
